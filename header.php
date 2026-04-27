@@ -39,7 +39,14 @@
                         <ul>
                             <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>#home" class="nav-link">Home</a></li>
                             <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>#topics" class="nav-link">Topics</a></li>
-                            <li><a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>" class="nav-link">Blog</a></li>
+                            <?php
+                            $blog_pages = get_pages(array(
+                                'meta_key' => '_wp_page_template',
+                                'meta_value' => 'template-blog.php'
+                            ));
+                            $blog_url = !empty($blog_pages) ? get_permalink($blog_pages[0]->ID) : get_permalink(get_option('page_for_posts'));
+                            ?>
+                            <li><a href="<?php echo esc_url( $blog_url ); ?>" class="nav-link">Blog</a></li>
                             <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>#platforms" class="nav-link">Platforms</a></li>
                             <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>#about" class="nav-link">About</a></li>
                         </ul>

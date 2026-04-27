@@ -192,7 +192,15 @@
             </div>
             
             <div style="text-align: center; margin-top: 50px;">
-                <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>" class="cta-button" style="padding: 15px 40px;">View All Articles</a>
+                <?php
+                // Mencari URL dari halaman yang menggunakan "Template: Blog Page"
+                $blog_pages = get_pages(array(
+                    'meta_key' => '_wp_page_template',
+                    'meta_value' => 'template-blog.php'
+                ));
+                $blog_url = !empty($blog_pages) ? get_permalink($blog_pages[0]->ID) : get_permalink(get_option('page_for_posts'));
+                ?>
+                <a href="<?php echo esc_url( $blog_url ); ?>" class="cta-button" style="padding: 15px 40px;">View All Articles</a>
             </div>
         </section>
 
