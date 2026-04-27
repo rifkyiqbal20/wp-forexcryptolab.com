@@ -1,0 +1,1 @@
+<?php\n// Fallback to home.php\nget_template_part( 'home' );\n?>
