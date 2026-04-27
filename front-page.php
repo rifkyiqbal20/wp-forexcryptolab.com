@@ -198,7 +198,14 @@
                     'meta_key' => '_wp_page_template',
                     'meta_value' => 'template-blog.php'
                 ));
-                $blog_url = !empty($blog_pages) ? get_permalink($blog_pages[0]->ID) : get_permalink(get_option('page_for_posts'));
+                $page_for_posts = get_option('page_for_posts');
+                if ( !empty($blog_pages) ) {
+                    $blog_url = get_permalink($blog_pages[0]->ID);
+                } elseif ( $page_for_posts ) {
+                    $blog_url = get_permalink($page_for_posts);
+                } else {
+                    $blog_url = home_url('/blog/');
+                }
                 ?>
                 <a href="<?php echo esc_url( $blog_url ); ?>" class="cta-button" style="padding: 15px 40px;">View All Articles</a>
             </div>
