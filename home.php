@@ -1,14 +1,23 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Blog home template (fallback)
+ * 
+ * @package ForexCryptoLab
+ */
 
-<main class="main-content" style="margin-top: 150px; min-height: 50vh;">
+get_header(); 
+?>
+
+<main class="blog-archive" style="margin-top: 140px; min-height: 60vh; padding: 60px 0;">
     <div class="container">
-        <h1 class="section-title">Berita &amp; Artikel Terbaru</h1>
-        <p class="section-subtitle">Kumpulan berita, analisis, dan artikel terbaru dari Forex Crypto Lab.</p>
+        <div class="blog-archive-header">
+            <h1>Berita &amp; Artikel Terbaru</h1>
+            <p>Kumpulan berita, analisis, dan artikel terbaru dari Forex Crypto Lab.</p>
+        </div>
         
         <?php 
-        // Selalu gunakan custom query untuk memastikan posts tampil
         $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
-        $posts_per_page = 10;
+        $posts_per_page = 9;
         
         $blog_query = new WP_Query( array(
             'post_type'      => 'post',
@@ -16,79 +25,61 @@
             'paged'          => $paged,
             'posts_per_page' => $posts_per_page,
         ) );
-        
-        $article_number = ( ( $paged - 1 ) * $posts_per_page ) + 1;
         ?>
 
         <?php if ( $blog_query->have_posts() ) : ?>
-            <div class="blog-list">
+            <div class="blog-archive-grid">
                 <?php while ( $blog_query->have_posts() ) : $blog_query->the_post(); ?>
-                    <article class="blog-list-item">
-                        <div class="blog-list-number">
-                            <span><?php echo esc_html( $article_number ); ?></span>
-                        </div>
-                        <div class="blog-list-thumbnail">
+                    <a href="<?php the_permalink(); ?>" class="blog-archive-card">
+                        <div class="blog-archive-card-img">
                             <?php if ( has_post_thumbnail() ) : ?>
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail( 'medium' ); ?>
-                                </a>
+                                <?php the_post_thumbnail( 'medium_large' ); ?>
                             <?php else : ?>
-                                <a href="<?php the_permalink(); ?>" class="blog-list-placeholder">
-                                    <span>📝</span>
-                                </a>
+                                <div class="blog-archive-card-noimg">📝</div>
                             <?php endif; ?>
                         </div>
-                        <div class="blog-list-content">
-                            <div class="blog-list-meta">
-                                <span>📅 <?php echo get_the_date(); ?></span>
-                                <span>👤 <?php the_author(); ?></span>
-                            </div>
-                            <h3 class="blog-list-title">
-                                <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
-                            </h3>
-                            <p class="blog-list-excerpt"><?php echo wp_trim_words( get_the_excerpt(), 25, '...' ); ?></p>
-                            <a href="<?php the_permalink(); ?>" class="blog-list-readmore">Baca Selengkapnya →</a>
+                        <div class="blog-archive-card-body">
+                            <span class="blog-archive-card-date"><?php echo get_the_date(); ?></span>
+                            <h3><?php the_title(); ?></h3>
+                            <p><?php echo wp_trim_words( get_the_excerpt(), 15, '...' ); ?></p>
+                            <span class="blog-archive-card-link">Baca Selengkapnya →</span>
                         </div>
-                    </article>
-                <?php 
-                $article_number++;
-                endwhile; ?>
+                    </a>
+                <?php endwhile; ?>
             </div>
             
-            <!-- Navigasi Artikel Sebelumnya / Selanjutnya -->
-            <div class="blog-navigation">
-                <div class="blog-nav-links">
-                    <div class="blog-nav-older">
-                        <?php if ( $paged < $blog_query->max_num_pages ) : ?>
-                            <a href="<?php echo esc_url( get_pagenum_link( $paged + 1 ) ); ?>">← Artikel Sebelumnya</a>
-                        <?php endif; ?>
-                    </div>
-                    <div class="blog-nav-newer">
-                        <?php if ( $paged > 1 ) : ?>
-                            <a href="<?php echo esc_url( get_pagenum_link( $paged - 1 ) ); ?>">Artikel Terbaru →</a>
-                        <?php endif; ?>
-                    </div>
-                </div>
+            <!-- Navigasi -->
+            <div class="blog-archive-nav">
+                <?php if ( $paged > 1 ) : ?>
+                    <a href="<?php echo esc_url( get_pagenum_link( $paged - 1 ) ); ?>" class="blog-archive-nav-btn">
+                        ← Artikel Terbaru
+                    </a>
+                <?php endif; ?>
                 
-                <?php if ( $blog_query->max_num_pages > 1 ) : ?>
-                <div class="blog-pagination">
+                <div class="blog-archive-nav-pages">
                     <?php
                     echo paginate_links( array(
                         'total'     => $blog_query->max_num_pages,
                         'current'   => $paged,
                         'mid_size'  => 2,
-                        'prev_text' => '«',
-                        'next_text' => '»',
+                        'prev_text' => '',
+                        'next_text' => '',
+                        'type'      => 'plain',
                     ) );
                     ?>
                 </div>
+                
+                <?php if ( $paged < $blog_query->max_num_pages ) : ?>
+                    <a href="<?php echo esc_url( get_pagenum_link( $paged + 1 ) ); ?>" class="blog-archive-nav-btn">
+                        Artikel Sebelumnya →
+                    </a>
                 <?php endif; ?>
             </div>
             
             <?php wp_reset_postdata(); ?>
         <?php else : ?>
-            <div class="blog-empty">
-                <p>Belum ada artikel saat ini.</p>
+            <div style="text-align: center; padding: 80px 20px; color: #999;">
+                <p style="font-size: 1.2em;">Belum ada artikel saat ini.</p>
             </div>
         <?php endif; ?>
     </div>
