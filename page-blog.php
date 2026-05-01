@@ -1,4 +1,13 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Template untuk Page dengan slug "blog"
+ * WordPress otomatis pakai file ini untuk halaman /blog/
+ * 
+ * @package ForexCryptoLab
+ */
+
+get_header(); 
+?>
 
 <main class="main-content" style="margin-top: 150px; min-height: 50vh;">
     <div class="container">
@@ -6,7 +15,6 @@
         <p class="section-subtitle">Kumpulan berita, analisis, dan artikel terbaru dari Forex Crypto Lab.</p>
         
         <?php 
-        // Selalu gunakan custom query untuk memastikan posts tampil
         $paged = ( get_query_var( 'paged' ) ) ? absint( get_query_var( 'paged' ) ) : 1;
         $posts_per_page = 10;
         
