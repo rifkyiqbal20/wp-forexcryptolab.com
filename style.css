@@ -867,3 +867,281 @@ Text Domain: forexcryptolab
 .prose.bot-content-wrapper a:hover {
     color: #ffd700;
 }
+
+
+/* ==========================================================================
+   BLOG LIST LAYOUT (Numbered Article List)
+   ========================================================================== */
+
+.blog-list {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.blog-list-item {
+    display: flex;
+    align-items: stretch;
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 10px 20px rgba(0,0,0,0.04);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+    margin-bottom: 24px;
+}
+
+.blog-list-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.08), 0 20px 40px rgba(30,60,114,0.1);
+}
+
+/* Nomor Artikel */
+.blog-list-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    flex-shrink: 0;
+}
+
+.blog-list-number span {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.8em;
+    font-weight: 800;
+    line-height: 1;
+}
+
+/* Thumbnail */
+.blog-list-thumbnail {
+    width: 180px;
+    min-height: 160px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.blog-list-thumbnail a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.blog-list-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.blog-list-item:hover .blog-list-thumbnail img {
+    transform: scale(1.05);
+}
+
+.blog-list-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    text-decoration: none;
+}
+
+.blog-list-placeholder span {
+    font-size: 3em;
+}
+
+/* Konten */
+.blog-list-content {
+    flex: 1;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.blog-list-date {
+    color: #888;
+    font-size: 0.85em;
+    margin-bottom: 6px;
+}
+
+.blog-list-title {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.blog-list-title a {
+    color: #1e3c72;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.blog-list-title a:hover {
+    color: #ffd700;
+}
+
+.blog-list-excerpt {
+    color: #555;
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* ==========================================================================
+   BLOG NAVIGATION (Prev/Next + Pagination)
+   ========================================================================== */
+
+.blog-navigation {
+    max-width: 900px;
+    margin: 50px auto 0;
+}
+
+.blog-nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.blog-nav-prev a,
+.blog-nav-next a {
+    display: inline-block;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30,60,114,0.2);
+}
+
+.blog-nav-prev a:hover,
+.blog-nav-next a:hover {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #1e3c72;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,215,0,0.3);
+}
+
+.blog-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.blog-pagination .page-numbers {
+    display: inline-block;
+    padding: 10px 18px;
+    background: white;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #1e3c72;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.06);
+}
+
+.blog-pagination .page-numbers.current {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    border-color: transparent;
+}
+
+.blog-pagination .page-numbers:hover:not(.current) {
+    background: #ffd700;
+    color: #1e3c72;
+    transform: translateY(-2px);
+    border-color: transparent;
+}
+
+/* ==========================================================================
+   RESPONSIVE - Blog List
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .blog-list-item {
+        flex-direction: column;
+    }
+
+    .blog-list-number {
+        min-width: unset;
+        width: 100%;
+        padding: 12px 0;
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .blog-list-number span {
+        font-size: 1.4em;
+    }
+
+    .blog-list-number::after {
+        content: 'Artikel';
+        font-size: 0.7em;
+        font-weight: 500;
+        opacity: 0.8;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .blog-list-thumbnail {
+        width: 100%;
+        min-height: 200px;
+        max-height: 220px;
+    }
+
+    .blog-list-content {
+        padding: 18px 20px;
+    }
+
+    .blog-list-title {
+        font-size: 1.15em;
+    }
+
+    .blog-nav-links {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .blog-nav-prev a,
+    .blog-nav-next a {
+        display: block;
+        text-align: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-list-thumbnail {
+        min-height: 160px;
+    }
+
+    .blog-list-content {
+        padding: 15px;
+    }
+
+    .blog-list-title {
+        font-size: 1.05em;
+    }
+
+    .blog-list-excerpt {
+        font-size: 0.9em;
+    }
+
+    .blog-pagination .page-numbers {
+        padding: 8px 14px;
+        font-size: 0.9em;
+    }
+}

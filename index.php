@@ -1,1 +1,9 @@
-<?php\n// Fallback to home.php\nget_template_part( 'home' );\n?>
+<?php
+/**
+ * The main template file (fallback)
+ * 
+ * @package ForexCryptoLab
+ */
+
+// Fallback to home.php
+get_template_part( 'home' );
