@@ -876,21 +876,20 @@ Text Domain: forexcryptolab
 .blog-list {
     max-width: 900px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
 }
 
 .blog-list-item {
     display: flex;
+    flex-direction: row;
     align-items: stretch;
-    background: white;
+    background: #ffffff;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 10px 20px rgba(0,0,0,0.04);
     transition: all 0.3s ease;
     border: 1px solid rgba(0,0,0,0.05);
     margin-bottom: 24px;
+    min-height: 170px;
 }
 
 .blog-list-item:hover {
@@ -903,26 +902,29 @@ Text Domain: forexcryptolab
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 70px;
     min-width: 70px;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
+    background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+    color: #ffffff;
     flex-shrink: 0;
 }
 
 .blog-list-number span {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.8em;
+    font-size: 2em;
     font-weight: 800;
     line-height: 1;
+    color: #ffffff;
 }
 
 /* Thumbnail */
 .blog-list-thumbnail {
-    width: 180px;
-    min-height: 160px;
+    width: 200px;
+    min-width: 200px;
     flex-shrink: 0;
     overflow: hidden;
     background: #f0f0f0;
+    position: relative;
 }
 
 .blog-list-thumbnail a {
@@ -935,6 +937,7 @@ Text Domain: forexcryptolab
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
     transition: transform 0.3s ease;
 }
 
@@ -948,6 +951,7 @@ Text Domain: forexcryptolab
     justify-content: center;
     width: 100%;
     height: 100%;
+    min-height: 170px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     text-decoration: none;
 }
@@ -959,16 +963,20 @@ Text Domain: forexcryptolab
 /* Konten */
 .blog-list-content {
     flex: 1;
-    padding: 20px 25px;
+    padding: 22px 28px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    min-width: 0;
 }
 
-.blog-list-date {
+.blog-list-meta {
+    display: flex;
+    gap: 15px;
     color: #888;
     font-size: 0.85em;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
 }
 
 .blog-list-title {
@@ -985,14 +993,35 @@ Text Domain: forexcryptolab
 }
 
 .blog-list-title a:hover {
-    color: #ffd700;
+    color: #2a5298;
 }
 
 .blog-list-excerpt {
     color: #555;
     font-size: 0.95em;
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+}
+
+.blog-list-readmore {
+    color: #2a5298;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: color 0.3s;
+    display: inline-block;
+}
+
+.blog-list-readmore:hover {
+    color: #ffd700;
+}
+
+/* Empty State */
+.blog-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #888;
+    font-size: 1.1em;
 }
 
 /* ==========================================================================
@@ -1012,12 +1041,12 @@ Text Domain: forexcryptolab
     gap: 20px;
 }
 
-.blog-nav-prev a,
-.blog-nav-next a {
+.blog-nav-older a,
+.blog-nav-newer a {
     display: inline-block;
     padding: 14px 28px;
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
+    color: #ffffff;
     text-decoration: none;
     border-radius: 50px;
     font-weight: 600;
@@ -1026,8 +1055,8 @@ Text Domain: forexcryptolab
     box-shadow: 0 4px 15px rgba(30,60,114,0.2);
 }
 
-.blog-nav-prev a:hover,
-.blog-nav-next a:hover {
+.blog-nav-older a:hover,
+.blog-nav-newer a:hover {
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
     color: #1e3c72;
     transform: translateY(-2px);
@@ -1044,7 +1073,7 @@ Text Domain: forexcryptolab
 .blog-pagination .page-numbers {
     display: inline-block;
     padding: 10px 18px;
-    background: white;
+    background: #ffffff;
     border-radius: 10px;
     text-decoration: none;
     color: #1e3c72;
@@ -1056,7 +1085,7 @@ Text Domain: forexcryptolab
 
 .blog-pagination .page-numbers.current {
     background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    color: white;
+    color: #ffffff;
     border-color: transparent;
 }
 
@@ -1074,12 +1103,13 @@ Text Domain: forexcryptolab
 @media (max-width: 768px) {
     .blog-list-item {
         flex-direction: column;
+        min-height: auto;
     }
 
     .blog-list-number {
-        min-width: unset;
         width: 100%;
-        padding: 12px 0;
+        min-width: unset;
+        padding: 14px 0;
         flex-direction: row;
         gap: 8px;
     }
@@ -1090,14 +1120,16 @@ Text Domain: forexcryptolab
 
     .blog-list-number::after {
         content: 'Artikel';
-        font-size: 0.7em;
+        font-size: 0.75em;
         font-weight: 500;
         opacity: 0.8;
         font-family: 'Inter', sans-serif;
+        color: #ffffff;
     }
 
     .blog-list-thumbnail {
         width: 100%;
+        min-width: unset;
         min-height: 200px;
         max-height: 220px;
     }
@@ -1115,8 +1147,8 @@ Text Domain: forexcryptolab
         gap: 12px;
     }
 
-    .blog-nav-prev a,
-    .blog-nav-next a {
+    .blog-nav-older a,
+    .blog-nav-newer a {
         display: block;
         text-align: center;
         width: 100%;
