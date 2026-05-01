@@ -22,7 +22,8 @@ add_action( 'after_setup_theme', 'forexcrypto_setup' );
 if ( ! function_exists( 'forexcrypto_scripts' ) ) {
     function forexcrypto_scripts() {
         wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap', array(), null );
-        wp_enqueue_style( 'forexcrypto-style', get_stylesheet_uri(), array(), wp_get_theme()->get('Version') );
+        // Versi manual untuk force cache bust
+        wp_enqueue_style( 'forexcrypto-style', get_stylesheet_uri(), array(), '2.0.5' );
     }
 }
 add_action( 'wp_enqueue_scripts', 'forexcrypto_scripts' );
